@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cysteg - Encrypt</title>
+    <style>
+        body {
+            background-color: #f2f2f2;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"], textarea, input[type="submit"] {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="file"], input[type="submit"] {
+            background-color: #00ff37;
+            color: #fff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap" rel="stylesheet">
+    <h1>Encrypt Your Message</h1>
+    <form action="/encrypt" method="POST" enctype="multipart/form-data" onsubmit="encryptAlert()">
+        <input type="file" name="image" accept="image/*" required>
+        <textarea name="message" rows="4" cols="50" placeholder="Enter your message" required></textarea>
+        <input type="submit" value="Encrypt">
+    </form>
+
+    <script>
+        function encryptAlert() {
+            alert("Encryption successful! Click OK to continue downloading the file.");
+        }
+    </script>
+</body>
+</html>
