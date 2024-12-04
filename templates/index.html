@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encodify Landing Page</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Framer Motion CDN for animations -->
+  <script src="https://cdn.jsdelivr.net/npm/framer-motion@latest"></script>
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/lucide-icons@latest"></script>
+  
+  <style>
+    /* Add any custom styles for your floating particles and glitch text here */
+    .floating-element {
+      animation: rotate 2s infinite linear;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body class="bg-gray-900 text-white font-sans">
+  <div id="root"></div>
+  
+  <!-- Animated Background Particles -->
+  <div class="absolute inset-0 opacity-50">
+    <!-- Floating particles will be dynamically added here using JavaScript -->
+  </div>
+
+  <!-- Header Section -->
+  <header class="relative z-10 container mx-auto px-6 py-8 flex justify-between items-center">
+    <div class="flex items-center space-x-4">
+      <div id="shieldIcon" class="w-12 h-12 text-blue-400 floating-element">
+        <!-- Shield Icon (Lucide React) -->
+      </div>
+      <h1 id="glitchText" class="text-3xl font-bold text-white"></h1>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative z-10 container mx-auto px-6 flex items-center justify-center min-h-[calc(100vh-200px)]">
+    <div class="text-center max-w-3xl">
+      <h2 class="text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">
+        Your Gateway to Learn Information Security
+      </h2>
+
+      <p class="text-xl text-gray-300 mb-10">
+        Unlock the power of innovative coding technologies. Transform your digital experience with cutting-edge solutions that push the boundaries of what's possible.
+      </p>
+
+      <div class="flex justify-center space-x-6">
+        <a href="{{ url_for('register') }}" class="btn px-10 py-4 text-lg font-semibold bg-blue-600 text-white rounded-lg hover:scale-105 active:scale-95 transition-transform">
+          Register
+        </a>
+        <a href="{{ url_for('login') }}" class="btn px-10 py-4 text-lg font-semibold bg-purple-600 text-white rounded-lg hover:scale-105 active:scale-95 transition-transform">
+          Login
+        </a>
+      </div>
+
+      <!-- Features Section -->
+      <div class="mt-20 grid grid-cols-3 gap-8">
+        <div class="bg-white/10 p-6 rounded-xl border border-white/20">
+          <div id="codeIcon" class="w-16 h-16 mx-auto mb-4 text-blue-400"></div>
+          <h3 class="text-2xl font-bold text-white mb-2">Advanced Coding</h3>
+          <p class="text-gray-300">Next-gen development tools</p>
+        </div>
+        <div class="bg-white/10 p-6 rounded-xl border border-white/20">
+          <div id="zapIcon" class="w-16 h-16 mx-auto mb-4 text-blue-400"></div>
+          <h3 class="text-2xl font-bold text-white mb-2">Lightning Fast</h3>
+          <p class="text-gray-300">Optimized performance</p>
+        </div>
+        <div class="bg-white/10 p-6 rounded-xl border border-white/20">
+          <div id="shieldIcon2" class="w-16 h-16 mx-auto mb-4 text-blue-400"></div>
+          <h3 class="text-2xl font-bold text-white mb-2">Secure</h3>
+          <p class="text-gray-300">Enterprise-grade protection</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 text-center py-4 text-gray-400">
+    © 2024 Encodify. All Rights Reserved.
+  </footer>
+
+  <script>
+    // Glitch Text Effect
+    const glitchTextElement = document.getElementById('glitchText');
+    const glitchVariations = ['Encodify', 'E N C O D I F Y', 'EncΩdify', 'Eñçödîfÿ','Team-22','Manaswini','Sajjad','Ram'];
+    let glitchInterval;
+
+    function startGlitchText() {
+      glitchInterval = setInterval(() => {
+        const randomIndex = Math.floor(Math.random() * glitchVariations.length);
+        glitchTextElement.textContent = glitchVariations[randomIndex];
+      }, 2000);
+    }
+
+    startGlitchText();
+
+    // Stop glitch text when the page is closed or refreshed
+    window.addEventListener('beforeunload', () => clearInterval(glitchInterval));
+
+    // Dynamically Add Particles to Background
+    const particleContainer = document.querySelector('.absolute.inset-0');
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('absolute', 'bg-white/10', 'rounded-full');
+      particle.style.width = `${Math.random() * 10 + 2}px`;
+      particle.style.height = `${Math.random() * 10 + 2}px`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.animation = `move ${Math.random() * 10 + 5}s infinite ease-in-out`;
+
+      particleContainer.appendChild(particle);
+    }
+
+    // Icon Insertion
+    document.getElementById('shieldIcon').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="lucide lucide-shield-check"><path d="M12 2l8 4v6a10 10 0 1 1-16 0V6l8-4z"></path><path d="M9 11l3 3 6-6"></path></svg>';
+    document.getElementById('codeIcon').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="lucide lucide-code"><path d="M4 6h16"></path><path d="M10 18l4-12"></path><path d="M14 18l-4-12"></path></svg>';
+    document.getElementById('zapIcon').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="lucide lucide-zap"><path d="M13 2L3 14h7l-1 8 7-12h-7l1-8z"></path></svg>';
+    document.getElementById('shieldIcon2').innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" class="lucide lucide-shield-check"><path d="M12 2l8 4v6a10 10 0 1 1-16 0V6l8-4z"></path><path d="M9 11l3 3 6-6"></path></svg>';
+  </script>
+</body>
+</html>
